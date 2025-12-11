@@ -1,12 +1,18 @@
 import cv2
 import pytesseract
 from PIL import Image
+import sys
 
-# ONLY for Windows: set Tesseract path
-# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# ONLY for Windows: set the correct path to tesseract.exe
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 # Step 1: Load image
 img = cv2.imread("document.jpg")
+
+# Check if image loaded successfully
+if img is None:
+    print("Error: Image not found. Make sure 'document.jpg' is in the project folder.")
+    sys.exit()
 
 # Step 2: Convert to grayscale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
